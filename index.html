@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>scrapbox-parser</title>
+    <style>
+        #plain-text,
+        #parsed-json {
+            width: 40vw;
+            height: 80vh;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="plain-text"></textarea>
+    <textarea id="parsed-json" readonly></textarea>
+    <button type="button" id="parse-button"> Parse </button>
+    <script src="https://unpkg.com/@progfay/scrapbox-parser@4.0.0-0/umd/scrapbox-parser.js"></script>
+    <script>
+        document.getElementById('parse-button').addEventListener('click', () => {
+            document.getElementById('parsed-json').value = JSON.stringify(ScrapboxParser.parse(document.getElementById('plain-text').value), null, 4)
+        })
+    </script>
+</body>
+
+</html>
