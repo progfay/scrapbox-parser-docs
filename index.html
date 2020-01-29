@@ -81,6 +81,7 @@
             outline: none;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css">
 </head>
 
 <body>
@@ -90,14 +91,20 @@
             <textarea id="plain-text"></textarea>
         </section>
         <section id="right-pane">
-            <textarea id="parsed-json" readonly></textarea>
+            <pre id="parsed-json">
+                <code class="json"></code>
+            </pre>
         </section>
     </article>
     <button type="button" id="parse-button"> → </button>
     <script src="https://unpkg.com/@progfay/scrapbox-parser@4.0.0-0/umd/scrapbox-parser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js" integrity="sha256-KPdGtw3AdDen/v6+9ue/V3m+9C2lpNiuirroLsHrJZM=" crossorigin="anonymous"></script> -->
     <script>
         document.getElementById('parse-button').addEventListener('click', () => {
-            document.getElementById('parsed-json').value = JSON.stringify(ScrapboxParser.parse(document.getElementById('plain-text').value), null, 4)
+            const parsedJson = JSON.stringify(ScrapboxParser.parse(document.getElementById('plain-text').value), null, 4).trim()
+            console.log(hljs.highlight('json', parsedJson).value)
+            document.querySelector('#parsed-json>code.json').innerHTML = hljs.highlight('json', parsedJson).value
         })
     </script>
 </body>
